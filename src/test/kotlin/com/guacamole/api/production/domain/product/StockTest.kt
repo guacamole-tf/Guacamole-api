@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
 
-internal class StockTest {
+class StockTest {
     @Test
     fun `재고는 0 이하의 개수로 생성할 수 없다`() {
         assertThrows<RuntimeException> {
