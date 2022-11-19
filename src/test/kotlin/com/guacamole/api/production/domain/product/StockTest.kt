@@ -17,7 +17,17 @@ class StockTest {
     fun `재고수가 1 이상이라면 재고수를 1개 감소시킬 수 있다`() {
         val stock = createStock(1)
 
-        assertDoesNotThrow { stock.decreaseCount() }
+        assertDoesNotThrow { stock.decreaseByCount() }
+    }
+
+    @Test
+    fun `재고수가 0 이하라면 재고수를 감소시킬 수 없다`() {
+        val stock = createStock(0)
+
+        assertThrows<RuntimeException> {
+            stock.decreaseByCount()
+            stock.decreaseByCount(2)
+        }
     }
 
     fun createStock(

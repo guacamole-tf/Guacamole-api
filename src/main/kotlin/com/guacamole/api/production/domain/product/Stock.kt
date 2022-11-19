@@ -9,4 +9,7 @@ class Stock(
             throw RuntimeException()
         }
     }
+
+    fun decreaseByCount(count: Int = 1): Stock = Stock(Math.subtractExact(this.count, count))
+
 }
