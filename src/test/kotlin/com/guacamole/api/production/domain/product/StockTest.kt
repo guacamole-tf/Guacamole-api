@@ -1,6 +1,7 @@
 package com.guacamole.api.production.domain.product
 
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.assertThrows
 
 
@@ -10,6 +11,13 @@ class StockTest {
         assertThrows<RuntimeException> {
             createStock(-1)
         }
+    }
+
+    @Test
+    fun `재고수가 1 이상이라면 재고수를 1개 감소시킬 수 있다`() {
+        val stock = createStock(1)
+
+        assertDoesNotThrow { stock.decreaseCount() }
     }
 
     fun createStock(
