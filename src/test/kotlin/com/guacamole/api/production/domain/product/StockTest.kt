@@ -30,6 +30,15 @@ class StockTest {
         }
     }
 
+    @Test
+    fun `재고수보다 높은 개수 만큼 재고수를 감소시키면 에러를 발생한다`() {
+        val stock = createStock(2)
+
+        assertThrows<RuntimeException> {
+            stock.decreaseByCount(3)
+        }
+    }
+
     fun createStock(
         count: Int = 0,
         id: Long = 1
