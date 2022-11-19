@@ -5,4 +5,7 @@ class Category(
     var parentId: Long? = null,
     var id: Long? = null
 ) {
+    init {
+        require(name.isNotBlank())
+    }
 }
