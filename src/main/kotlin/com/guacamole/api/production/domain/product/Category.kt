@@ -1,8 +1,8 @@
 package com.guacamole.api.production.domain.product
 
 class Category(
-    var parent_id: Long,
     var name: String,
+    var parentId: Long? = null,
     var id: Long? = null
 ) {
 }
