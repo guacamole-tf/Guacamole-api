@@ -15,6 +15,6 @@ class Category(
     }
 }
 
-private fun Long.greaterOrEqual(other: Long): Boolean {
+fun Long.greaterOrEqual(other: Long): Boolean {
     return this >= other
 }

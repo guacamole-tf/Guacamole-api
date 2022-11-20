@@ -21,7 +21,7 @@ object CategorySteps {
         name: String = CATEGORY_NAME,
         parentId: Long = CATEGORY_PARENT_ID
     ): ExtractableResponse<Response> {
-        val params: Map<String, String> = `카테고리 생성 데이터를 만든다`(name, parentId)
+        val params = `카테고리 생성 데이터를 만든다`(name, parentId)
         return RestAssured.given().log().all()
             .accept(MediaType.APPLICATION_JSON_VALUE)
             .contentType(ContentType.JSON)
@@ -32,7 +32,7 @@ object CategorySteps {
     }
 
     private fun `카테고리 생성 데이터를 만든다`(name: String, parentId: Long): Map<String, String> {
-        return `카테고리 생성 데이터를 만든다`(name, parentId.toString())
+        return this.`카테고리 생성 데이터를 만든다`(name, parentId.toString())
     }
 
     private fun `카테고리 생성 데이터를 만든다`(name: String, parentId: String): Map<String, String> {
