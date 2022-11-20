@@ -17,4 +17,8 @@ class CategoryService(
         category.update(categoryCommand.name, category.parentId)
         categoryStore.save(category)
     }
+
+    fun deleteCategory(categoryId: Long) {
+        categoryStore.remove(categoryId)
+    }
 }

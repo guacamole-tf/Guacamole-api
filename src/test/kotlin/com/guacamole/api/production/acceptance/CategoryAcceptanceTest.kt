@@ -32,6 +32,9 @@ class CategoryAcceptanceTest : AcceptanceTest() {
 
         val categoryUpdateResponse = `카테고리를 수정 요청을 한다`(CATEGORY_NAME, CATEGORY_PARENT_ID)
         `카테고리 수정됨`(categoryUpdateResponse)
+
+        val categoryDeleteResponse = `카테고리를 삭제 요청을 한다`()
+        `카테고리 삭제됨`(categoryDeleteResponse)
     }
 
     @Test

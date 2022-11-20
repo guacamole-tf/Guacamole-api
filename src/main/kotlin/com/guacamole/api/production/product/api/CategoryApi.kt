@@ -13,18 +13,24 @@ class CategoryApi(
     private val categoryService: CategoryService
 ) {
     @PostMapping
-    fun createCategoryApi(@RequestBody request: CategoryCreateRequest): ResponseEntity<Any> {
+    fun createCategory(@RequestBody request: CategoryCreateRequest): ResponseEntity<Any> {
         val categoryId = categoryService.createCategory(request.toCommand())
 
         return ResponseEntity.created(URI.create("/api/categories/${categoryId}")).build()
     }
 
     @PutMapping("/{categoryId}")
-    fun createCategoryApi(
+    fun updateCategory(
         @RequestBody request: CategoryUpdateRequest,
         @PathVariable categoryId: Long
     ): ResponseEntity<Any> {
         categoryService.updateCategory(request.toCommand(), categoryId)
+        return ResponseEntity.noContent().build()
+    }
+
+    @DeleteMapping("/{categoryId}")
+    fun deleteCategory(@PathVariable categoryId: Long): ResponseEntity<Any> {
+        categoryService.deleteCategory(categoryId)
         return ResponseEntity.noContent().build()
     }
 }

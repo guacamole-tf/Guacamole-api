@@ -23,4 +23,12 @@ class CategoryMapStore : CategoryStore {
         }
         throw RuntimeException()
     }
+
+    override fun remove(categoryId: Long) {
+        if (store.containsKey(categoryId)) {
+            store.remove(categoryId)
+            return
+        }
+        throw RuntimeException()
+    }
 }
