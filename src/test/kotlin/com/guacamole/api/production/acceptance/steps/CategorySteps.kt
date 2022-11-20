@@ -28,7 +28,7 @@ object CategorySteps {
     fun `카테고리를 수정 요청을 한다`(
         name: String = CATEGORY_NAME,
         parentId: Long = CATEGORY_PARENT_ID,
-        id: Long = 0
+        id: Long = 1
     ): ExtractableResponse<Response> {
         val params = `카테고리 수정 데이터를 만든다`(name, parentId)
         return RestAssured.given().log().all()

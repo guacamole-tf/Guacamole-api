@@ -12,6 +12,5 @@ class CategoryCommand(
         require(parentId.greaterOrEqual(0))
     }
 
-
     fun toEntity(): Category = Category(name, parentId)
 }

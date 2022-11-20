@@ -11,4 +11,10 @@ class CategoryService(
 
     fun createCategory(categoryCommand: CategoryCommand): Long =
         categoryStore.save(categoryCommand.toEntity()).id!!
+
+    fun updateCategory(categoryCommand: CategoryCommand, categoryId: Long) {
+        val category = categoryStore.findById(categoryId)
+        category.update(categoryCommand.name, category.parentId)
+        categoryStore.save(category)
+    }
 }

@@ -1,15 +1,16 @@
-package com.guacamole.api.production.product.application.request
+package com.guacamole.api.production.product.api.request
 
 import com.guacamole.api.production.product.domain.command.CategoryCommand
 import javax.validation.constraints.Min
 import javax.validation.constraints.NotBlank
+import javax.validation.constraints.NotNull
 
-class CategoryCreateRequest(
+class CategoryUpdateRequest(
     @field:NotBlank
     val name: String,
 
     @field:Min(0)
-//    @field:NotNull
+    @field:NotNull
     val parentId: Long
 ) {
     fun toCommand(): CategoryCommand {
