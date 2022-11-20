@@ -1,11 +1,10 @@
-package com.guacamole.api.production.domain.product
+package com.guacamole.api.production.product.domain
 
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
 class CategoryTest {
-
 
     @ParameterizedTest
     @ValueSource(strings = ["", " ", "   ", "    "])
@@ -25,8 +24,8 @@ class CategoryTest {
 
     fun createCategory(
         name: String = "CATEGORY",
-        parentId: Long = 0,
-        id: Long = 1,
+        parentId: Long = 0L,
+        id: Long = 0L
     ): Category {
         return Category(name, parentId, id)
     }

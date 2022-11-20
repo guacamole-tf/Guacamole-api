@@ -1,4 +1,4 @@
-package com.guacamole.api.production.domain.product
+package com.guacamole.api.production.product.domain
 
 class Product(
     var category_id: Long,
@@ -9,5 +9,4 @@ class Product(
     var detail_description: String,
     var id: Long? = null
 ) {
-
 }

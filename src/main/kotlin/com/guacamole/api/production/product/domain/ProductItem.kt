@@ -1,4 +1,4 @@
-package com.guacamole.api.production.domain.product
+package com.guacamole.api.production.product.domain
 
 class ProductItem(
     var product_id: Long,

@@ -1,4 +1,4 @@
-package com.guacamole.api.production.domain.product
+package com.guacamole.api.production.product.domain
 
 class ProductItemPolicy(
     var productItemId: Long,
@@ -9,5 +9,4 @@ class ProductItemPolicy(
     var discountRate: Int,
     var id: Long? = null
 ) {
-
 }
