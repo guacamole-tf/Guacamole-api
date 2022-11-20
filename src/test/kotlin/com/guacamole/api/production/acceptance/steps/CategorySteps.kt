@@ -40,6 +40,17 @@ object CategorySteps {
             .extract()
     }
 
+    fun `카테고리를 삭제 요청을 한다`(
+        id: Long = 1
+    ): ExtractableResponse<Response> {
+        return RestAssured.given().log().all()
+            .accept(MediaType.APPLICATION_JSON_VALUE)
+            .contentType(ContentType.JSON)
+            .`when`().delete(CATEGORY_PATH + "/${id}")
+            .then().log().all()
+            .extract()
+    }
+
     fun `카테고리를 생성 요청됨`(categoryName: String, categoryParentId: Long): Long {
         val response = `카테고리를 생성 요청을 한다`(categoryName, categoryParentId)
         val header = response.header("location")
@@ -68,6 +79,10 @@ object CategorySteps {
     }
 
     fun `카테고리 수정됨`(response: ExtractableResponse<Response>) {
+        assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
+    }
+
+    fun `카테고리 삭제됨`(response: ExtractableResponse<Response>) {
         assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
     }
 }
