@@ -2,24 +2,26 @@ package com.guacamole.api.production.product.application
 
 import com.guacamole.api.production.product.domain.Category
 import com.guacamole.api.production.product.domain.store.CategoryStore
+import java.util.concurrent.atomic.AtomicInteger
 
 class CategoryMapStore : CategoryStore {
 
     private var store: MutableMap<Long, Category> = HashMap()
+    private var count: AtomicInteger = AtomicInteger()
 
     override fun save(category: Category): Category {
         if (store.containsKey(category.id)) {
-            store.put(category.id!!, category)
-            return category
+            store[category.id!!] = category
+            return Category(category.name, category.parentId, count.get().toLong())
         }
 
-        store += mapOf(store.size.toLong() + 1 to category)
-        return Category(category.name, category.parentId, store.size.toLong())
+        store[count.incrementAndGet().toLong()] = category
+        return Category(category.name, category.parentId, count.get().toLong())
     }
 
     override fun findById(categoryId: Long): Category {
         if (store.containsKey(categoryId)) {
-            return store.get(categoryId)!!
+            return store[categoryId]!!
         }
         throw RuntimeException()
     }
