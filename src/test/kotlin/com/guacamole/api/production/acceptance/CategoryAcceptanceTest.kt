@@ -1,7 +1,10 @@
 package com.guacamole.api.production.acceptance
 
 import com.guacamole.api.production.acceptance.steps.CategorySteps.`카테고리 생성됨`
+import com.guacamole.api.production.acceptance.steps.CategorySteps.`카테고리 수정됨`
+import com.guacamole.api.production.acceptance.steps.CategorySteps.`카테고리를 생성 요청됨`
 import com.guacamole.api.production.acceptance.steps.CategorySteps.`카테고리를 생성 요청을 한다`
+import com.guacamole.api.production.acceptance.steps.CategorySteps.`카테고리를 수정 요청을 한다`
 import com.guacamole.api.production.fixture.CATEGORY_NAME
 import com.guacamole.api.production.fixture.CATEGORY_PARENT_ID
 import org.junit.jupiter.api.DisplayName
@@ -30,5 +33,13 @@ class CategoryAcceptanceTest : AcceptanceTest() {
         val response = `카테고리를 생성 요청을 한다`(CATEGORY_NAME, CATEGORY_PARENT_ID)
 
         `카테고리 생성됨`(response)
+    }
+
+    @Test
+    fun `카테고리를 수정한다`() {
+        var createCategoryId = `카테고리를 생성 요청됨`(CATEGORY_NAME, CATEGORY_PARENT_ID)
+        val response = `카테고리를 수정 요청을 한다`(CATEGORY_NAME, CATEGORY_PARENT_ID, createCategoryId)
+
+        `카테고리 수정됨`(response)
     }
 }
