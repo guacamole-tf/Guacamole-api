@@ -5,7 +5,7 @@ import javax.validation.constraints.Min
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 
-data class ProductCreateRequest(
+data class ProductUpdateRequest(
 
     @field:Min(0)
     @field:NotNull
@@ -23,7 +23,7 @@ data class ProductCreateRequest(
     @field:NotBlank
     val detailDescription: String,
 ) {
-    fun toCommand(): ProductCommand {
+    fun toCommand(): ProductCommand  {
         return ProductCommand(categoryId, name, descriptionImagePath, originPlace, detailDescription)
     }
 }

@@ -21,4 +21,11 @@ class CategoryService(
     fun deleteCategory(categoryId: Long) {
         categoryStore.remove(categoryId)
     }
+
+    fun verifyCategoryId(categoryId: Long) {
+        if(categoryStore.existsById(categoryId)) {
+            return
+        }
+        throw RuntimeException()
+    }
 }

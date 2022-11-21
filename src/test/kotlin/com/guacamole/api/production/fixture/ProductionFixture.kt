@@ -6,7 +6,6 @@ const val PRODUCT_PATH = "/api/products"
 
 const val PRODUCT_CATEGORY_ID_FIELD = "categoryId"
 const val PRODUCT_NAME_FIELD = "name"
-const val PRODUCT_THUMBNAIL_IMAGE_PATH_FIELD = "thumbnailImagePath"
 const val PRODUCT_DESCRIPTION_IMAGE_PATH_FIELD = "descriptionImagePath"
 const val PRODUCT_ORIGIN_PLACE_FIELD = "originPlace"
 const val PRODUCT_DETAIL_DESCRIPTION_FIELD = "detailDescription"
@@ -14,7 +13,6 @@ const val PRODUCT_ID_FIELD = "id"
 
 const val PRODUCT_CATEGORY_ID: Long = 1L
 const val PRODUCT_NAME: String = "상품"
-const val PRODUCT_THUMBNAIL_IMAGE_PATH: String = "http://gaucamoletf.com/images/sampleImage.png"
 const val PRODUCT_DESCRIPTION_IMAGE_PATH: String = "http://gaucamoletf.com/images/sampleImage.png"
 const val PRODUCT_ORIGIN_PLACE: String = "원산지"
 const val PRODUCT_DETAIL_DESCRIPTION: String = "과카몰리 상품"
@@ -23,13 +21,12 @@ const val PRODUCT_ID: Long = 0L
 fun createProduct(
     categoryId: Long = PRODUCT_CATEGORY_ID,
     name: String = PRODUCT_NAME,
-    thumbnailImagePath: String = PRODUCT_THUMBNAIL_IMAGE_PATH,
     descriptionImagePath: String = PRODUCT_DESCRIPTION_IMAGE_PATH,
     originPlace: String = PRODUCT_ORIGIN_PLACE,
     detailDescription: String = PRODUCT_DETAIL_DESCRIPTION,
     id: Long = PRODUCT_ID,
 ): Product {
     return Product(
-        categoryId, name, thumbnailImagePath, descriptionImagePath, originPlace, detailDescription, id
+        categoryId, name, descriptionImagePath, originPlace, detailDescription, id
     )
 }

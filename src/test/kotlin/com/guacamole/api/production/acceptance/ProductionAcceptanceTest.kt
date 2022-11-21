@@ -10,6 +10,7 @@ import com.guacamole.api.production.acceptance.steps.ProductSteps.`상품 수정
 import com.guacamole.api.production.acceptance.steps.ProductSteps.`상품 수정됨`
 import com.guacamole.api.production.fixture.CATEGORY_NAME
 import com.guacamole.api.production.fixture.CATEGORY_PARENT_ID
+import com.guacamole.api.production.fixture.OTHER_CATEGORY_NAME
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
@@ -50,11 +51,12 @@ class ProductionAcceptanceTest : AcceptanceTest() {
 
     @Test
     fun `상품을 수정한다`() {
-        val categoryId = `카테고리를 생성 요청됨`(CATEGORY_NAME, CATEGORY_PARENT_ID)
-        val productId = `상품 생성 요청 됨`(categoryId)
+        val originalCategoryId = `카테고리를 생성 요청됨`(CATEGORY_NAME, CATEGORY_PARENT_ID)
 
-        val response = `상품 수정 요청을 한다`(productId)
+        val productId = `상품 생성 요청 됨`(originalCategoryId)
+        val updateCategoryId = `카테고리를 생성 요청됨`(OTHER_CATEGORY_NAME, CATEGORY_PARENT_ID)
 
+        val response = `상품 수정 요청을 한다`(productId, updateCategoryId)
         `상품 수정됨`(response)
     }
 }

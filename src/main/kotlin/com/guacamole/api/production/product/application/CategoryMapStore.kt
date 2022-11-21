@@ -33,4 +33,6 @@ class CategoryMapStore : CategoryStore {
         }
         throw RuntimeException()
     }
+
+    override fun existsById(categoryId: Long): Boolean = store.containsKey(categoryId)
 }
