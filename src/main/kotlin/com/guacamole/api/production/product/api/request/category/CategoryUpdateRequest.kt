@@ -1,4 +1,4 @@
-package com.guacamole.api.production.product.api.request
+package com.guacamole.api.production.product.api.request.category
 
 import com.guacamole.api.production.product.domain.command.CategoryCommand
 import javax.validation.constraints.Min

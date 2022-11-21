@@ -1,7 +1,7 @@
 package com.guacamole.api.production.product.api
 
-import com.guacamole.api.production.product.api.request.CategoryCreateRequest
-import com.guacamole.api.production.product.api.request.CategoryUpdateRequest
+import com.guacamole.api.production.product.api.request.category.CategoryCreateRequest
+import com.guacamole.api.production.product.api.request.category.CategoryUpdateRequest
 import com.guacamole.api.production.product.application.CategoryService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
