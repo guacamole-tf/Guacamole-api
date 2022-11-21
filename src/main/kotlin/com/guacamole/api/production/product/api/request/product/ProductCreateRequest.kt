@@ -1,4 +1,32 @@
 package com.guacamole.api.production.product.api.request.product
 
-class ProductCreateRequest {
+import com.guacamole.api.production.product.domain.command.ProductCommand
+import javax.validation.constraints.Min
+import javax.validation.constraints.NotBlank
+import javax.validation.constraints.NotNull
+
+data class ProductCreateRequest(
+
+    @field:Min(0)
+    @field:NotNull
+    val categoryId: Long,
+
+    @field:NotBlank
+    val name: String,
+
+    @field:NotBlank
+    val thumbnailImagePath: String,
+
+    @field:NotBlank
+    val descriptionImagePath: String,
+
+    @field:NotBlank
+    val originPlace: String,
+
+    @field:NotBlank
+    val detailDescription: String,
+) {
+    fun toCommand(): ProductCommand {
+        return ProductCommand(categoryId, name, thumbnailImagePath, descriptionImagePath, originPlace, detailDescription)
+    }
 }

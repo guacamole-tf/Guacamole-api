@@ -5,7 +5,7 @@ import javax.validation.constraints.Min
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 
-class CategoryUpdateRequest(
+data class CategoryUpdateRequest(
     @field:NotBlank
     val name: String,
 
