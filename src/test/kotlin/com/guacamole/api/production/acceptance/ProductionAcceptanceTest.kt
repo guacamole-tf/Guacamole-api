@@ -3,6 +3,8 @@ package com.guacamole.api.production.acceptance
 import com.guacamole.api.production.acceptance.steps.CategorySteps.`카테고리 생성됨`
 import com.guacamole.api.production.acceptance.steps.CategorySteps.`카테고리를 생성 요청됨`
 import com.guacamole.api.production.acceptance.steps.CategorySteps.`카테고리를 생성 요청을 한다`
+import com.guacamole.api.production.acceptance.steps.ProductSteps.`상품 삭제 요청을 한다`
+import com.guacamole.api.production.acceptance.steps.ProductSteps.`상품 삭제됨`
 import com.guacamole.api.production.acceptance.steps.ProductSteps.`상품 생성 요청 됨`
 import com.guacamole.api.production.acceptance.steps.ProductSteps.`상품 생성 요청을 한다`
 import com.guacamole.api.production.acceptance.steps.ProductSteps.`상품 생성됨`
@@ -38,6 +40,9 @@ class ProductionAcceptanceTest : AcceptanceTest() {
 
         val productUpdateResponse = `상품 수정 요청을 한다`(1)
         `상품 수정됨`(productUpdateResponse)
+
+        val productDeleteResponse = `상품 삭제 요청을 한다`(1)
+        `상품 수정됨`(productDeleteResponse)
     }
 
     @Test
@@ -58,5 +63,14 @@ class ProductionAcceptanceTest : AcceptanceTest() {
 
         val response = `상품 수정 요청을 한다`(productId, updateCategoryId)
         `상품 수정됨`(response)
+    }
+
+    @Test
+    fun `상품을 삭제한다`() {
+        val originalCategoryId = `카테고리를 생성 요청됨`(CATEGORY_NAME, CATEGORY_PARENT_ID)
+        val productId = `상품 생성 요청 됨`(originalCategoryId)
+
+        val response = `상품 삭제 요청을 한다`(productId)
+        `상품 삭제됨`(response)
     }
 }

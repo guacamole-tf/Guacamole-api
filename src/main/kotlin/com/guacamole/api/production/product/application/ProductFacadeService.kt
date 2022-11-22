@@ -10,7 +10,6 @@ class ProductFacadeService(
     private val categoryService: CategoryService
 ) {
 
-    // 트랜잭셔널
     fun create(productCommand: ProductCommand): Long {
         val product = productCommand.toEntity()
         return productStore.save(product).id!!
@@ -18,7 +17,7 @@ class ProductFacadeService(
 
     fun update(productId: Long, productCommand: ProductCommand) {
         val product = productStore.findById(productId)
-        if(product.categoryId != productCommand.categoryId) {
+        if (product.categoryId != productCommand.categoryId) {
             categoryService.verifyCategoryId(productCommand.categoryId)
         }
         product.update(
@@ -26,7 +25,12 @@ class ProductFacadeService(
             productCommand.name,
             productCommand.descriptionImagePath,
             productCommand.originPlace,
-            productCommand.detailDescription)
+            productCommand.detailDescription
+        )
         productStore.save(product)
+    }
+
+    fun delete(productId: Long) {
+        productStore.remove(productId)
     }
 }

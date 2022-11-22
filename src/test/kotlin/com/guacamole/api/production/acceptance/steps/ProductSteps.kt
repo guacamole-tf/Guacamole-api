@@ -55,6 +55,15 @@ object ProductSteps {
             .extract()
     }
 
+    fun `상품 삭제 요청을 한다`(id: Long): ExtractableResponse<Response> {
+        return RestAssured.given().log().all()
+            .accept(MediaType.APPLICATION_JSON_VALUE)
+            .contentType(ContentType.JSON)
+            .`when`().delete(PRODUCT_PATH + "/${id}")
+            .then().log().all()
+            .extract()
+    }
+
     private fun `상품 수정 데이터를 만든다`(
         categoryId: Long,
         name: String,
@@ -115,6 +124,10 @@ object ProductSteps {
     }
 
     fun `상품 수정됨`(response: ExtractableResponse<Response>) {
+        AssertionsForInterfaceTypes.assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
+    }
+
+    fun `상품 삭제됨`(response: ExtractableResponse<Response>) {
         AssertionsForInterfaceTypes.assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
     }
 }

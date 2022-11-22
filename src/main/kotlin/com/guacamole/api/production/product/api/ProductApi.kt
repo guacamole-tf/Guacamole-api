@@ -4,12 +4,7 @@ import com.guacamole.api.production.product.api.request.product.ProductCreateReq
 import com.guacamole.api.production.product.api.request.product.ProductUpdateRequest
 import com.guacamole.api.production.product.application.ProductFacadeService
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import java.net.URI
 
 @RequestMapping("/api/products")
@@ -30,6 +25,12 @@ class ProductApi(
         @RequestBody request: ProductUpdateRequest
     ): ResponseEntity<Any> {
         productFacadeService.update(productId, request.toCommand())
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{productId}")
+    fun deleteProduct(@PathVariable productId: Long): ResponseEntity<Any> {
+        productFacadeService.delete(productId)
         return ResponseEntity.noContent().build();
     }
 }
