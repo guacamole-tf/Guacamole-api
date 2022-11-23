@@ -1,4 +1,4 @@
-package com.guacamole.api.product.domain
+package com.guacamole.api.product.domain.product
 
 class Product(
     var categoryId: Long,

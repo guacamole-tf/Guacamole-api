@@ -1,9 +1,7 @@
-package com.guacamole.api.product.domain.store
-
-import com.guacamole.api.product.domain.Category
+package com.guacamole.api.product.domain.category
 
 interface CategoryStore {
-    fun save(category: Category): Category
+    fun saveAndFlush(category: Category): Category
     fun findById(categoryId: Long): Category
     fun remove(categoryId: Long)
     fun existsById(categoryId: Long): Boolean

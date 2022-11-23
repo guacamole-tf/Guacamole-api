@@ -11,6 +11,9 @@ import org.springframework.http.MediaType
 
 object ProductSteps {
 
+    /**
+     * Create Request
+     */
     fun `상품 생성 요청을 한다`(
         categoryId: Long = PRODUCT_CATEGORY_ID,
         name: String = PRODUCT_NAME,

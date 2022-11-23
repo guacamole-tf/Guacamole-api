@@ -1,6 +1,6 @@
 package com.guacamole.api.product.api.request.product
 
-import com.guacamole.api.product.domain.command.ProductCommand
+import com.guacamole.api.product.application.command.ProductCommand
 import javax.validation.constraints.Min
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull

@@ -1,6 +1,6 @@
 package com.guacamole.api.fixture
 
-import com.guacamole.api.product.domain.Product
+import com.guacamole.api.product.domain.product.Product
 
 const val PRODUCT_PATH = "/api/products"
 

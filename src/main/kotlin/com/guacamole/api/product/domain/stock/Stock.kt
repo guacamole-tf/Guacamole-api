@@ -1,4 +1,4 @@
-package com.guacamole.api.product.domain
+package com.guacamole.api.product.domain.stock
 
 class Stock(
     var count: Int,

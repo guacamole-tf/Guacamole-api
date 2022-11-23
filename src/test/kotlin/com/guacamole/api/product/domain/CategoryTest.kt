@@ -1,10 +1,15 @@
 package com.guacamole.api.product.domain
 
-import com.guacamole.api.product.domain.Category
+import com.guacamole.api.fixture.CATEGORY_ID
+import com.guacamole.api.fixture.CATEGORY_NAME
+import com.guacamole.api.fixture.CATEGORY_ROOT_PARENT_ID
+import com.guacamole.api.product.domain.category.Category
+import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
 
+@DisplayName("카테고리 단위 테스트")
 class CategoryTest {
 
     @ParameterizedTest
@@ -24,9 +29,9 @@ class CategoryTest {
     }
 
     fun createCategory(
-        name: String = "CATEGORY",
-        parentId: Long = 0L,
-        id: Long = 0L
+        name: String = CATEGORY_NAME,
+        parentId: Long = CATEGORY_ROOT_PARENT_ID,
+        id: Long = CATEGORY_ID
     ): Category {
         return Category(name, parentId, id)
     }

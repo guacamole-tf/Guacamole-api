@@ -1,7 +1,5 @@
-package com.guacamole.api.product.application
+package com.guacamole.api.product.domain.product
 
-import com.guacamole.api.product.domain.Product
-import com.guacamole.api.product.domain.store.ProductStore
 import org.springframework.stereotype.Service
 import java.util.concurrent.atomic.AtomicInteger
 
@@ -10,7 +8,7 @@ class ProductMapStore(
     private var store: MutableMap<Long, Product> = HashMap(),
     private var count: AtomicInteger = AtomicInteger()
 ) : ProductStore {
-    override fun save(product: Product): Product {
+    override fun saveAndFlush(product: Product): Product {
         if (store.containsKey(product.id)) {
             store[product.id!!] = product
             return Product(
@@ -19,7 +17,7 @@ class ProductMapStore(
                 product.descriptionImagePath,
                 product.originPlace,
                 product.detailDescription,
-                1L
+                count.get().toLong()
             )
         }
 
@@ -48,4 +46,7 @@ class ProductMapStore(
         }
         throw RuntimeException()
     }
+
+    override fun existById(productId: Long): Boolean =
+        store.containsKey(productId)
 }

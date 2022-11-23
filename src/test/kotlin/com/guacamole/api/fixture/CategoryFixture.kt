@@ -1,6 +1,6 @@
 package com.guacamole.api.fixture
 
-import com.guacamole.api.product.domain.Category
+import com.guacamole.api.product.domain.category.Category
 
 const val CATEGORY_PATH = "/api/categories"
 

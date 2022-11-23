@@ -1,7 +1,5 @@
-package com.guacamole.api.product.application
+package com.guacamole.api.product.domain.category
 
-import com.guacamole.api.product.domain.Category
-import com.guacamole.api.product.domain.store.CategoryStore
 import java.util.concurrent.atomic.AtomicInteger
 
 class CategoryMapStore : CategoryStore {
@@ -9,7 +7,7 @@ class CategoryMapStore : CategoryStore {
     private var store: MutableMap<Long, Category> = HashMap()
     private var count: AtomicInteger = AtomicInteger()
 
-    override fun save(category: Category): Category {
+    override fun saveAndFlush(category: Category): Category {
         if (store.containsKey(category.id)) {
             store[category.id!!] = category
             return Category(category.name, category.parentId, count.get().toLong())

@@ -11,6 +11,9 @@ import org.springframework.http.MediaType
 
 object CategorySteps {
 
+    /**
+     * Create Request
+     */
     fun `카테고리를 생성 요청을 한다`(
         name: String = CATEGORY_NAME,
         parentId: Long = CATEGORY_ROOT_PARENT_ID

@@ -1,24 +1,23 @@
 package com.guacamole.api.product.application
 
-import com.guacamole.api.product.domain.command.ProductCommand
-import com.guacamole.api.product.domain.store.ProductStore
+import com.guacamole.api.product.application.command.ProductCommand
+import com.guacamole.api.product.domain.category.CategoryService
+import com.guacamole.api.product.domain.product.ProductService
 import org.springframework.stereotype.Service
 
 @Service
 class ProductFacadeService(
-    private val productStore: ProductStore,
+    private val productService: ProductService,
     private val categoryService: CategoryService
 ) {
 
-    fun create(productCommand: ProductCommand): Long {
-        val product = productCommand.toProduct()
-        return productStore.save(product).id!!
-    }
+    fun registrationProduct(productCommand: ProductCommand): Long =
+        productService.saveAndFlush(productCommand.toProduct()).id!!
 
-    fun update(productId: Long, productCommand: ProductCommand) {
-        val product = productStore.findById(productId)
+    fun updateProduct(productId: Long, productCommand: ProductCommand) {
+        val product = productService.findById(productId)
         if (product.categoryId != productCommand.categoryId) {
-            categoryService.verifyCategoryId(productCommand.categoryId)
+            verifyAcceptableCategoryId(productCommand)
         }
         product.update(
             productCommand.categoryId,
@@ -27,10 +26,17 @@ class ProductFacadeService(
             productCommand.originPlace,
             productCommand.detailDescription
         )
-        productStore.save(product)
+        productService.update(product)
     }
 
-    fun delete(productId: Long) {
-        productStore.remove(productId)
+    private fun verifyAcceptableCategoryId(productCommand: ProductCommand) {
+        if (categoryService.existsById(productCommand.categoryId)) {
+            return
+        }
+        throw RuntimeException()
+    }
+
+    fun removeProduct(productId: Long) {
+        productService.remove(productId)
     }
 }

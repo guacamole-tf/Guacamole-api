@@ -2,7 +2,7 @@ package com.guacamole.api.product.api
 
 import com.guacamole.api.product.api.request.category.CategoryCreateRequest
 import com.guacamole.api.product.api.request.category.CategoryUpdateRequest
-import com.guacamole.api.product.application.CategoryService
+import com.guacamole.api.product.domain.category.CategoryService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import java.net.URI
@@ -14,8 +14,7 @@ class CategoryApi(
 ) {
     @PostMapping
     fun createCategory(@RequestBody request: CategoryCreateRequest): ResponseEntity<Any> {
-        val categoryId = categoryService.createCategory(request.toCommand())
-
+        val categoryId = categoryService.saveAndFlush(request.toCommand())
         return ResponseEntity.created(URI.create("/api/categories/${categoryId}")).build()
     }
 
@@ -24,13 +23,13 @@ class CategoryApi(
         @RequestBody request: CategoryUpdateRequest,
         @PathVariable categoryId: Long
     ): ResponseEntity<Any> {
-        categoryService.updateCategory(request.toCommand(), categoryId)
+        categoryService.update(request.toCommand(), categoryId)
         return ResponseEntity.noContent().build()
     }
 
     @DeleteMapping("/{categoryId}")
     fun deleteCategory(@PathVariable categoryId: Long): ResponseEntity<Any> {
-        categoryService.deleteCategory(categoryId)
+        categoryService.remove(categoryId)
         return ResponseEntity.noContent().build()
     }
 }

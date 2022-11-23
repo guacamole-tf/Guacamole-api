@@ -17,17 +17,6 @@ import org.junit.jupiter.api.Test
 @DisplayName("상품 인수 테스트")
 class ProductAcceptanceTest : AcceptanceTest() {
 
-    /**
-     * Scenario: 삼품 관리
-     * When 카테고리 생성 요청
-     * Then 카테고리 생성됨
-     * When 상품 생성 요청
-     * Then 상품 생성됨
-     * When 상품 수정 요청
-     * Then 상품 수정됨
-     * When 상품 삭제 요청
-     * Then 상품 삭제됨
-     */
     @Test
     fun `상품을 관리한다`() {
         val categoryCreateResponse = `카테고리를 생성 요청을 한다`(CATEGORY_NAME, CATEGORY_ROOT_PARENT_ID)

@@ -15,8 +15,8 @@ class ProductApi(
 ) {
 
     @PostMapping
-    fun createProduct(@RequestBody @Valid request: ProductCreateRequest): ResponseEntity<Any> {
-        val productId = productFacadeService.create(request.toCommand())
+    fun registrationProduct(@RequestBody @Valid request: ProductCreateRequest): ResponseEntity<Any> {
+        val productId = productFacadeService.registrationProduct(request.toCommand())
         return ResponseEntity.created(URI.create("/api/products/${productId}")).build()
     }
 
@@ -25,13 +25,13 @@ class ProductApi(
         @PathVariable productId: Long,
         @RequestBody request: ProductUpdateRequest
     ): ResponseEntity<Any> {
-        productFacadeService.update(productId, request.toCommand())
+        productFacadeService.updateProduct(productId, request.toCommand())
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{productId}")
-    fun deleteProduct(@PathVariable productId: Long): ResponseEntity<Any> {
-        productFacadeService.delete(productId)
+    fun removeProduct(@PathVariable productId: Long): ResponseEntity<Any> {
+        productFacadeService.removeProduct(productId)
         return ResponseEntity.noContent().build();
     }
 }

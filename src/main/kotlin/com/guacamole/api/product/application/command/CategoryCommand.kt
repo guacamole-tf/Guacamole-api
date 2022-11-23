@@ -1,7 +1,7 @@
-package com.guacamole.api.product.domain.command
+package com.guacamole.api.product.application.command
 
 import com.guacamole.api.common.extension.greaterOrEqual
-import com.guacamole.api.product.domain.Category
+import com.guacamole.api.product.domain.category.Category
 
 class CategoryCommand(
     val name: String,
@@ -12,5 +12,6 @@ class CategoryCommand(
         require(parentId.greaterOrEqual(0))
     }
 
-    fun toCategory(): Category = Category(name, parentId)
+    fun toCategory(): Category =
+        Category(name, parentId)
 }

@@ -1,4 +1,4 @@
-package com.guacamole.api.product.domain
+package com.guacamole.api.product.domain.category
 
 import com.guacamole.api.common.extension.greaterOrEqual
 
