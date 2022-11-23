@@ -1,7 +1,7 @@
 package com.guacamole.api.acceptance
 
-import com.guacamole.api.acceptance.steps.CategorySteps.`카테고리 생성됨`
 import com.guacamole.api.acceptance.steps.CategorySteps.`카테고리 생성 요청 됨`
+import com.guacamole.api.acceptance.steps.CategorySteps.`카테고리 생성됨`
 import com.guacamole.api.acceptance.steps.CategorySteps.`카테고리를 생성 요청을 한다`
 import com.guacamole.api.acceptance.steps.ProductSteps.`상품 삭제 요청을 한다`
 import com.guacamole.api.acceptance.steps.ProductSteps.`상품 삭제됨`
@@ -15,7 +15,7 @@ import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
 @DisplayName("상품 인수 테스트")
-class ProductionAcceptanceTest : AcceptanceTest() {
+class ProductAcceptanceTest : AcceptanceTest() {
 
     /**
      * Scenario: 삼품 관리
