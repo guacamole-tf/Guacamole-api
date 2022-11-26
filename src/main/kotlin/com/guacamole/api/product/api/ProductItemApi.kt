@@ -33,4 +33,13 @@ class ProductItemApi(
         productItemFacadeService.updateProductItem(productId, productItemId, productItemUpdateRequest.toCommand())
         return ResponseEntity.noContent().build()
     }
+
+    @DeleteMapping("/{productItemId}")
+    fun deleteProductItem(
+        @PathVariable productId: Long,
+        @PathVariable productItemId: Long,
+    ): ResponseEntity<Any> {
+        productItemFacadeService.deleteProductItem(productId, productItemId)
+        return ResponseEntity.noContent().build()
+    }
 }

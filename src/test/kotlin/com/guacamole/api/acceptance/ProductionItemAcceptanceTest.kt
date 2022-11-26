@@ -47,8 +47,10 @@ class ProductionItemAcceptanceTest : AcceptanceTest() {
             PRODUCT_ITEM_OTHER_SIZE_UNIT,
             PRODUCT_SIZE_OTHER_RATE
         )
-
         `상품 아이템 수정됨`(productItemUpdateResponse)
+
+        val deleteResponse = `상품 아이템 삭제 요청을 한다`(PRODUCT_ITEM_ID, PRODUCT_ID)
+        `상품 아이템 삭제됨`(deleteResponse)
     }
 
     @Test

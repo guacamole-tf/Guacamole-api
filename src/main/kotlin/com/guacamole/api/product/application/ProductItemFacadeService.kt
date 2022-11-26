@@ -47,4 +47,8 @@ class ProductItemFacadeService(
             // TODO: Push Service 연동
         }
     }
+
+    fun deleteProductItem(productId: Long, productItemId: Long) {
+        productItemService.delete(productItemId)
+    }
 }

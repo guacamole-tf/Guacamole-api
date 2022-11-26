@@ -22,4 +22,8 @@ class ProductItemService(
 
         productRepository.saveAndFlush(productItem.update(thumbnailImagePath, sizeUnit, sizeRate, price))
     }
+
+    fun delete(productItemId: Long) {
+        productRepository.deleteById(productItemId)
+    }
 }
