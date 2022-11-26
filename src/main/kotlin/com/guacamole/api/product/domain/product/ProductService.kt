@@ -9,19 +9,34 @@ import org.springframework.transaction.annotation.Transactional
 class ProductService(
     private val productRepository: ProductRepository
 ) {
-    fun saveAndFlush(product: Product): Product =
+    fun save(product: Product): Product =
         productRepository.saveAndFlush(product)
 
-    fun findById(productId: Long): Product =
-        productRepository.findByIdOrNull(productId)
-            ?: throw RuntimeException("Not Found Product")
+    fun update(
+        productId: Long,
+        categoryId: Long,
+        name: String,
+        descriptionImagePath: String,
+        originPlace: String,
+        detailDescription: String
+    ) {
+        val product = (productRepository.findByIdOrNull(productId)
+            ?: throw RuntimeException("Not Found Product"))
 
-    fun remove(productId: Long) =
-        productRepository.deleteById(productId)
-
-    fun update(product: Product): Product =
-        productRepository.saveAndFlush(product)
+        productRepository.saveAndFlush(
+            product.update(
+                categoryId,
+                name,
+                descriptionImagePath,
+                originPlace,
+                detailDescription
+            )
+        )
+    }
 
     fun existsById(productId: Long): Boolean =
         productRepository.existsById(productId)
+
+    fun deleteById(productId: Long) =
+        productRepository.deleteById(productId)
 }

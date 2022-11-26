@@ -6,7 +6,6 @@ import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 
 data class ProductCreateRequest(
-
     @field:Min(0)
     @field:NotNull
     val categoryId: Long,

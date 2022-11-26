@@ -6,7 +6,6 @@ import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 
 data class ProductItemCreateRequest(
-
     @field:Min(0)
     @field:NotNull
     val price: Int,

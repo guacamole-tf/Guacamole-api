@@ -13,7 +13,6 @@ import javax.validation.Valid
 class ProductApi(
     private val productFacadeService: ProductFacadeService
 ) {
-
     @PostMapping
     fun registrationProduct(@RequestBody @Valid request: ProductCreateRequest): ResponseEntity<Any> {
         val productId = productFacadeService.registrationProduct(request.toCommand())
@@ -23,7 +22,7 @@ class ProductApi(
     @PutMapping("/{productId}")
     fun updateProduct(
         @PathVariable productId: Long,
-        @RequestBody request: ProductUpdateRequest
+        @RequestBody @Valid request: ProductUpdateRequest
     ): ResponseEntity<Any> {
         productFacadeService.updateProduct(productId, request.toCommand())
         return ResponseEntity.noContent().build();
@@ -31,7 +30,7 @@ class ProductApi(
 
     @DeleteMapping("/{productId}")
     fun removeProduct(@PathVariable productId: Long): ResponseEntity<Any> {
-        productFacadeService.removeProduct(productId)
+        productFacadeService.deleteProduct(productId)
         return ResponseEntity.noContent().build();
     }
 }

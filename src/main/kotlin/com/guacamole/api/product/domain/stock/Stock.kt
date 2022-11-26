@@ -1,6 +1,7 @@
 package com.guacamole.api.product.domain.stock
 
 import com.guacamole.api.common.entity.BaseTimeEntity
+import com.guacamole.api.common.extension.greaterOrEqual
 import javax.persistence.*
 
 @Table(name = "stock")
@@ -13,7 +14,7 @@ class Stock(
     var id: Long? = null
 ) : BaseTimeEntity() {
     init {
-        require(count >= DEFAULT_COUNT)
+        require(count.greaterOrEqual(DEFAULT_COUNT))
     }
 
     fun decreaseByCount(count: Int = DEFAULT_DECREASE_COUNT): Stock =

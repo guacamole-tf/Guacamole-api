@@ -11,10 +11,10 @@ class CategoryService(
     private val categoryRepository: CategoryRepository
 ) {
 
-    fun saveAndFlush(categoryCommand: CategoryCommand): Long =
+    fun save(categoryCommand: CategoryCommand): Long =
         categoryRepository.saveAndFlush(categoryCommand.toCategory()).id!!
 
-    fun update(categoryCommand: CategoryCommand, categoryId: Long) {
+    fun update(categoryId: Long, categoryCommand: CategoryCommand) {
         val category = categoryRepository.findByIdOrNull(categoryId)
             ?: throw RuntimeException("Not Found Category")
         verifyCategoryParentId(categoryCommand.parentId)
@@ -31,6 +31,6 @@ class CategoryService(
     fun existsById(categoryId: Long): Boolean =
         categoryRepository.existsById(categoryId)
 
-    fun remove(categoryId: Long) =
+    fun deleteById(categoryId: Long) =
         categoryRepository.deleteById(categoryId)
 }

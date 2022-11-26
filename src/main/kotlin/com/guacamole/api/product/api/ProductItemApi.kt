@@ -13,7 +13,6 @@ import javax.validation.Valid
 class ProductItemApi(
     private val productItemFacadeService: ProductItemFacadeService
 ) {
-
     @PostMapping
     fun createProductItem(
         @PathVariable productId: Long,

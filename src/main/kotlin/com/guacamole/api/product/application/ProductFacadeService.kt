@@ -12,31 +12,28 @@ class ProductFacadeService(
 ) {
 
     fun registrationProduct(productCommand: ProductCommand): Long =
-        productService.saveAndFlush(productCommand.toProduct()).id!!
+        productService.save(productCommand.toProduct()).id!!
 
     fun updateProduct(productId: Long, productCommand: ProductCommand) {
-        val product = productService.findById(productId)
-        if (product.categoryId != productCommand.categoryId) {
-            verifyAcceptableCategoryId(productCommand)
-        }
-        product.update(
+        verifyAcceptableCategoryId(productCommand.categoryId)
+        productService.update(
+            productId,
             productCommand.categoryId,
             productCommand.name,
-            productCommand.descriptionImagePath,
             productCommand.originPlace,
-            productCommand.detailDescription
+            productCommand.detailDescription,
+            productCommand.descriptionImagePath
         )
-        productService.update(product)
     }
 
-    private fun verifyAcceptableCategoryId(productCommand: ProductCommand) {
-        if (categoryService.existsById(productCommand.categoryId)) {
+    private fun verifyAcceptableCategoryId(categoryId: Long) {
+        if (categoryService.existsById(categoryId)) {
             return
         }
         throw RuntimeException()
     }
 
-    fun removeProduct(productId: Long) {
-        productService.remove(productId)
+    fun deleteProduct(productId: Long) {
+        productService.deleteById(productId)
     }
 }
