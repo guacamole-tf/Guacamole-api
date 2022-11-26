@@ -5,7 +5,7 @@ import javax.validation.constraints.Min
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.NotNull
 
-data class ProductItemCreateRequest(
+data class ProductItemUpdateRequest(
 
     @field:Min(0)
     @field:NotNull

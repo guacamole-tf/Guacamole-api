@@ -5,7 +5,6 @@ import com.guacamole.api.product.domain.productitempolicy.ProductItemPolicy
 import com.guacamole.api.product.domain.stock.Stock
 
 data class ProductItemCommand(
-    val productId: Long,
     val price: Int,
     val count: Int,
     val thumbnailImagePath: String,
@@ -15,7 +14,7 @@ data class ProductItemCommand(
     fun toStock(): Stock =
         Stock(count)
 
-    fun toProductItem(stockId: Long): ProductItem =
+    fun toProductItem(productId: Long, stockId: Long): ProductItem =
         ProductItem(productId, stockId, thumbnailImagePath, sizeUnit, sizeRate, price)
 
     fun toProductItemPolicy(productItemId: Long): ProductItemPolicy =

@@ -28,4 +28,11 @@ class ProductItem(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 ) : BaseTimeEntity() {
+
+    fun update(
+        thumbnailImagePath: String,
+        sizeUnit: String,
+        sizeRate: Int,
+        price: Int,
+    ): ProductItem = ProductItem(this.productId, this.stockId, thumbnailImagePath, sizeUnit, sizeRate, price)
 }

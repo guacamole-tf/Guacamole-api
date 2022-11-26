@@ -8,6 +8,6 @@ import org.springframework.transaction.annotation.Transactional
 class ProductItemPolicyService(
     private val productItemPolicyRepository: ProductItemPolicyRepository
 ) {
-    fun saveAndFlush(productItemPolicy: ProductItemPolicy): ProductItemPolicy =
+    fun save(productItemPolicy: ProductItemPolicy): ProductItemPolicy =
         productItemPolicyRepository.saveAndFlush(productItemPolicy)
 }

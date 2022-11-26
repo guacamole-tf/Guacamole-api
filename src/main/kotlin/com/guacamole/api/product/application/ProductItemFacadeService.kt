@@ -17,16 +17,31 @@ class ProductItemFacadeService(
     private val transactionHandler: TransactionHandler
 ) {
 
-    fun registrationProductItem(productItemCommand: ProductItemCommand): Long {
-        if (!productService.existsById(productItemCommand.productId)) {
+    fun registrationProductItem(productId: Long, productItemCommand: ProductItemCommand): Long {
+        if (!productService.existsById(productId)) {
             throw RuntimeException()
         }
 
         return transactionHandler.runInTransaction {
-            val stock = stockService.saveAndFlush(productItemCommand.toStock())
-            val productItem = productItemService.saveAndFlush(productItemCommand.toProductItem(stock.id!!))
-            productItemPolicyService.saveAndFlush(productItemCommand.toProductItemPolicy(productItem.id!!))
+            val stock = stockService.save(productItemCommand.toStock())
+            val productItem = productItemService.save(productItemCommand.toProductItem(productId, stock.id!!))
+            productItemPolicyService.save(productItemCommand.toProductItemPolicy(productItem.id!!))
             return@runInTransaction productItem.id!!
+        }
+    }
+
+    fun updateProductItem(productId: Long, productItemId: Long, productItemCommand: ProductItemCommand) {
+        val stockId = productItemService.findStockIdById(productItemId)
+
+        transactionHandler.runInTransaction {
+            stockService.update(stockId, productItemCommand.count)
+            productItemService.update(
+                productItemId,
+                productItemCommand.thumbnailImagePath,
+                productItemCommand.sizeUnit,
+                productItemCommand.sizeRate,
+                productItemCommand.price
+            )
         }
     }
 }

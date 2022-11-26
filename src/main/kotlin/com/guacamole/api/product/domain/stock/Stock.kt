@@ -16,7 +16,9 @@ class Stock(
         require(count >= DEFAULT_COUNT)
     }
 
-    fun decreaseByCount(count: Int = DEFAULT_DECREASE_COUNT): Stock = Stock(Math.subtractExact(this.count, count))
+    fun decreaseByCount(count: Int = DEFAULT_DECREASE_COUNT): Stock = Stock(Math.subtractExact(this.count, count), id)
+
+    fun update(count: Int): Stock = Stock(count, id)
 
     companion object {
         const val DEFAULT_COUNT: Int = 0

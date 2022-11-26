@@ -1,5 +1,6 @@
 package com.guacamole.api.product.domain.stock
 
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -8,5 +9,13 @@ import org.springframework.transaction.annotation.Transactional
 class StockService(
     private val stockRepository: StockRepository
 ) {
-    fun saveAndFlush(stock: Stock): Stock = stockRepository.saveAndFlush(stock)
+    fun save(stock: Stock): Stock = stockRepository.saveAndFlush(stock)
+
+    fun update(stockId: Long, count: Int) {
+        val stock = (stockRepository.findByIdOrNull(stockId)
+            ?: throw RuntimeException("Not Found Stock"))
+        if (stock.count != count) {
+            stockRepository . saveAndFlush (stock.update(count))
+        }
+    }
 }

@@ -1,6 +1,7 @@
 package com.guacamole.api.product.api
 
 import com.guacamole.api.product.api.request.productitem.ProductItemCreateRequest
+import com.guacamole.api.product.api.request.productitem.ProductItemUpdateRequest
 import com.guacamole.api.product.application.ProductItemFacadeService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -18,7 +19,18 @@ class ProductItemApi(
         @PathVariable productId: Long,
         @RequestBody @Valid productItemCreateRequest: ProductItemCreateRequest
     ): ResponseEntity<Any> {
-        val productItemId = productItemFacadeService.registrationProductItem(productItemCreateRequest.toCommand())
+        val productItemId =
+            productItemFacadeService.registrationProductItem(productId, productItemCreateRequest.toCommand())
         return ResponseEntity.created(URI.create("/api/products/${productId}/items/${productItemId}")).build()
+    }
+
+    @PutMapping("/{productItemId}")
+    fun updateProductItem(
+        @PathVariable productId: Long,
+        @PathVariable productItemId: Long,
+        @RequestBody @Valid productItemUpdateRequest: ProductItemUpdateRequest
+    ): ResponseEntity<Any> {
+        productItemFacadeService.updateProductItem(productId, productItemId, productItemUpdateRequest.toCommand())
+        return ResponseEntity.noContent().build()
     }
 }
