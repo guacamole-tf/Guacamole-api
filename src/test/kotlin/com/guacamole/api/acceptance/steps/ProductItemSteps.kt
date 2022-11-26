@@ -51,6 +51,18 @@ object ProductItemSteps {
             .extract()
     }
 
+    fun `상품 아이템 삭제 요청을 한다`(
+        productItemId: Long,
+        productId: Long
+    ): ExtractableResponse<Response> {
+        return RestAssured.given().log().all()
+            .accept(MediaType.APPLICATION_JSON_VALUE)
+            .contentType(ContentType.JSON)
+            .`when`().delete(PRODUCT_ITEM_PATH.format(productId) + "/${productItemId}")
+            .then().log().all()
+            .extract()
+    }
+
     /**
      * Create Request Data
      */
@@ -102,7 +114,6 @@ object ProductItemSteps {
         return removePrefix.toLong()
     }
 
-
     /**
      * Response Assertion
      */
@@ -111,6 +122,10 @@ object ProductItemSteps {
     }
 
     fun `상품 아이템 수정됨`(response: ExtractableResponse<Response>) {
+        AssertionsForInterfaceTypes.assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
+    }
+
+    fun `상품 아이템 삭제됨`(response: ExtractableResponse<Response>) {
         AssertionsForInterfaceTypes.assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
     }
 }
