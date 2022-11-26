@@ -31,11 +31,6 @@ class Product(
         descriptionImagePath: String,
         originPlace: String,
         detailDescription: String
-    ) {
-        this.categoryId = categoryId
-        this.name = name
-        this.descriptionImagePath = descriptionImagePath
-        this.originPlace = originPlace
-        this.detailDescription = detailDescription
-    }
+    ): Product =
+        Product(categoryId, name, detailDescription, originPlace, detailDescription, this.id)
 }

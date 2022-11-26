@@ -34,7 +34,8 @@ class ProductItem(
         sizeUnit: String,
         sizeRate: Int,
         price: Int,
-    ): ProductItem = ProductItem(this.productId, this.stockId, thumbnailImagePath, sizeUnit, sizeRate, price, this.id)
+    ): ProductItem =
+        ProductItem(this.productId, this.stockId, thumbnailImagePath, sizeUnit, sizeRate, price, this.id)
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

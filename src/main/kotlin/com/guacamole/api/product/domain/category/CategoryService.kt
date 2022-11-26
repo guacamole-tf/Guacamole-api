@@ -18,8 +18,7 @@ class CategoryService(
         val category = categoryRepository.findByIdOrNull(categoryId)
             ?: throw RuntimeException("Not Found Category")
         verifyCategoryParentId(categoryCommand.parentId)
-        category.update(categoryCommand.name, categoryCommand.parentId)
-        categoryRepository.saveAndFlush(category)
+        categoryRepository.saveAndFlush(category.update(categoryCommand.name, categoryCommand.parentId))
     }
 
     private fun verifyCategoryParentId(categoryId: Long) {

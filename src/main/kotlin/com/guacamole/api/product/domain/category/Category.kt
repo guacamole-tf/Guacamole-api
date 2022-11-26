@@ -22,9 +22,22 @@ class Category(
         require(parentId.greaterOrEqual(DEFAULT_PARENT_ID))
     }
 
-    fun update(name: String, parentId: Long) {
-        this.name = name
-        this.parentId = parentId
+    fun update(name: String, parentId: Long): Category =
+        Category(name, parentId, this.id)
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Category
+
+        if (id != other.id) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return id?.hashCode() ?: 0
     }
 
     companion object {
