@@ -17,8 +17,8 @@ class ProductItemService(
             ?: throw RuntimeException("Not Found ProductItem")
 
     fun update(productItemId: Long, thumbnailImagePath: String, sizeUnit: String, sizeRate: Int, price: Int) {
-        val productItem = (productRepository.findByIdOrNull(productItemId)
-            ?: throw RuntimeException("Not Found ProductItem"))
+        val productItem = productRepository.findByIdOrNull(productItemId)
+            ?: throw RuntimeException("Not Found ProductItem")
 
         productRepository.saveAndFlush(productItem.update(thumbnailImagePath, sizeUnit, sizeRate, price))
     }

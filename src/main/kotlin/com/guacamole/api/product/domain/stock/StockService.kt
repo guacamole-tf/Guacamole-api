@@ -15,7 +15,7 @@ class StockService(
         val stock = (stockRepository.findByIdOrNull(stockId)
             ?: throw RuntimeException("Not Found Stock"))
         if (stock.count != count) {
-            stockRepository . saveAndFlush (stock.update(count))
+            stockRepository.saveAndFlush(stock.update(count))
         }
     }
 }

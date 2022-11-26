@@ -13,6 +13,12 @@ const val PRODUCT_SIZE_RATE: Int = 1
 const val PRODUCT_ITEM_STOCK_ID: Long = 1L
 const val PRODUCT_ITEM_ID: Long = 1L
 
+const val PRODUCT_ITEM_OTHER_PRICE: Int = 2000
+const val PRODUCT_ITEM_OTHER_COUNT: Int = 100
+const val PRODUCT_ITEM_OTHER_THUMBNAIL_IMAGE_PATH: String = "http://gaucamoletf.com/images/otherSampleThumnauilImage.png"
+const val PRODUCT_ITEM_OTHER_SIZE_UNIT: String = "리터"
+const val PRODUCT_SIZE_OTHER_RATE: Int = 10
+
 const val PRODUCT_ITEM_PRODUCT_ID_FIELD: String = "productId"
 const val PRODUCT_ITEM_PRICE_FIELD: String = "price"
 const val PRODUCT_ITEM_COUNT_FIELD: String = "count"

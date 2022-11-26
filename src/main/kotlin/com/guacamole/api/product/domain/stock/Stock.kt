@@ -21,7 +21,7 @@ class Stock(
     fun update(count: Int): Stock = Stock(count, id)
 
     companion object {
-        const val DEFAULT_COUNT: Int = 0
-        const val DEFAULT_DECREASE_COUNT: Int = 1
+        private const val DEFAULT_COUNT: Int = 0
+        private const val DEFAULT_DECREASE_COUNT: Int = 1
     }
 }

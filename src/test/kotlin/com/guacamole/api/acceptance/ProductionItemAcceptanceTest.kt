@@ -12,8 +12,6 @@ import com.guacamole.api.acceptance.steps.ProductSteps.`상품 생성 요청 됨
 import com.guacamole.api.acceptance.steps.ProductSteps.`상품 생성 요청을 한다`
 import com.guacamole.api.acceptance.steps.ProductSteps.`상품 생성됨`
 import com.guacamole.api.fixture.*
-import io.restassured.response.ExtractableResponse
-import io.restassured.response.Response
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 
@@ -28,6 +26,27 @@ class ProductionItemAcceptanceTest : AcceptanceTest() {
         val productCreateResponse = `상품 생성 요청을 한다`(CATEGORY_ID)
         `상품 생성됨`(productCreateResponse)
 
+        val response = `상품 아이템 생성 요청을 한다`(
+            PRODUCT_ID,
+            PRODUCT_ITEM_PRICE,
+            PRODUCT_ITEM_COUNT,
+            PRODUCT_ITEM_THUMBNAIL_IMAGE_PATH,
+            PRODUCT_ITEM_SIZE_UNIT,
+            PRODUCT_SIZE_RATE
+        )
+        `상품 아이템 생성됨`(response)
+
+        val productItemUpdateResponse = `상품 아이템 수정 요청을 한다`(
+            PRODUCT_ITEM_ID,
+            PRODUCT_ID,
+            PRODUCT_ITEM_OTHER_PRICE,
+            PRODUCT_ITEM_OTHER_COUNT,
+            PRODUCT_ITEM_OTHER_THUMBNAIL_IMAGE_PATH,
+            PRODUCT_ITEM_OTHER_SIZE_UNIT,
+            PRODUCT_SIZE_OTHER_RATE
+        )
+
+        `상품 아이템 수정됨`(productItemUpdateResponse)
     }
 
     @Test
@@ -61,13 +80,14 @@ class ProductionItemAcceptanceTest : AcceptanceTest() {
             PRODUCT_SIZE_RATE
         )
 
-        val response = `상품 아이템 수정 요청을 한다`(productItemId,
+        val response = `상품 아이템 수정 요청을 한다`(
+            productItemId,
             productId,
-            PRODUCT_ITEM_PRICE,
-            PRODUCT_ITEM_COUNT,
-            PRODUCT_ITEM_THUMBNAIL_IMAGE_PATH,
-            PRODUCT_ITEM_SIZE_UNIT,
-            PRODUCT_SIZE_RATE
+            PRODUCT_ITEM_OTHER_PRICE,
+            PRODUCT_ITEM_OTHER_COUNT,
+            PRODUCT_ITEM_OTHER_THUMBNAIL_IMAGE_PATH,
+            PRODUCT_ITEM_OTHER_SIZE_UNIT,
+            PRODUCT_SIZE_OTHER_RATE
         )
 
         `상품 아이템 수정됨`(response)

@@ -28,6 +28,6 @@ class Category(
     }
 
     companion object {
-        const val DEFAULT_PARENT_ID: Long = 0L
+        private const val DEFAULT_PARENT_ID: Long = 0L
     }
 }
