@@ -1,5 +1,6 @@
 package com.guacamole.api.product.application
 
+import com.guacamole.api.common.TransactionHandler
 import com.guacamole.api.product.application.command.ProductItemCommand
 import com.guacamole.api.product.domain.product.ProductService
 import com.guacamole.api.product.domain.productitem.ProductItemService
@@ -12,20 +13,20 @@ class ProductItemFacadeService(
     private val productService: ProductService,
     private val stockService: StockService,
     private val productItemService: ProductItemService,
-    private val productItemPolicyService: ProductItemPolicyService
+    private val productItemPolicyService: ProductItemPolicyService,
+    private val transactionHandler: TransactionHandler
 ) {
 
-    // 트랜잭셔널
     fun registrationProductItem(productItemCommand: ProductItemCommand): Long {
-        if (productService.existsById(productItemCommand.productId)) {
+        if (!productService.existsById(productItemCommand.productId)) {
             throw RuntimeException()
         }
 
-        // 트랜잭션 핸들러로 동작
-        val stock = stockService.saveAndFlush(productItemCommand.toStock())
-        val productItem = productItemService.saveAndFlush(productItemCommand.toProductItem(stock.id!!))
-        val productItemPolicy =
+        return transactionHandler.runInTransaction {
+            val stock = stockService.saveAndFlush(productItemCommand.toStock())
+            val productItem = productItemService.saveAndFlush(productItemCommand.toProductItem(stock.id!!))
             productItemPolicyService.saveAndFlush(productItemCommand.toProductItemPolicy(productItem.id!!))
-        return productItem.id!!
+            return@runInTransaction productItem.id!!
+        }
     }
 }

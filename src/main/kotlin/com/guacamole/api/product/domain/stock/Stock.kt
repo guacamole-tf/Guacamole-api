@@ -1,9 +1,17 @@
 package com.guacamole.api.product.domain.stock
 
+import com.guacamole.api.common.entity.BaseTimeEntity
+import javax.persistence.*
+
+@Table(name = "stock")
+@Entity
 class Stock(
+    @Column(name = "count")
     var count: Int,
+
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
-) {
+) : BaseTimeEntity() {
     init {
         require(count >= DEFAULT_COUNT)
     }

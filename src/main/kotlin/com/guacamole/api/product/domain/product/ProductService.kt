@@ -1,23 +1,27 @@
 package com.guacamole.api.product.domain.product
 
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
+@Transactional
 @Service
 class ProductService(
-    private val productStore: ProductStore = ProductMapStore()
+    private val productRepository: ProductRepository
 ) {
     fun saveAndFlush(product: Product): Product =
-        productStore.saveAndFlush(product)
+        productRepository.saveAndFlush(product)
 
     fun findById(productId: Long): Product =
-        productStore.findById(productId)
+        productRepository.findByIdOrNull(productId)
+            ?: throw RuntimeException("Not Found Product")
 
     fun remove(productId: Long) =
-        productStore.remove(productId)
+        productRepository.deleteById(productId)
 
     fun update(product: Product): Product =
-        productStore.saveAndFlush(product)
+        productRepository.saveAndFlush(product)
 
     fun existsById(productId: Long): Boolean =
-        productStore.existById(productId)
+        productRepository.existsById(productId)
 }

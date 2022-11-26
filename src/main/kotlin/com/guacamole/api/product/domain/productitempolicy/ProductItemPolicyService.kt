@@ -1,11 +1,13 @@
 package com.guacamole.api.product.domain.productitempolicy
 
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
+@Transactional
 @Service
 class ProductItemPolicyService(
-    private val productItemPolicyStore: ProductItemPolicyStore = ProductItemPolicyMapStore()
+    private val productItemPolicyRepository: ProductItemPolicyRepository
 ) {
     fun saveAndFlush(productItemPolicy: ProductItemPolicy): ProductItemPolicy =
-        productItemPolicyStore.saveAndFlush(productItemPolicy)
+        productItemPolicyRepository.saveAndFlush(productItemPolicy)
 }
