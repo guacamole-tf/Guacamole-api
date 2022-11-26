@@ -1,6 +1,7 @@
 package com.guacamole.api.product.domain.productitempolicy
 
 import com.guacamole.api.common.entity.BaseTimeEntity
+import com.guacamole.api.common.extension.greaterOrEqual
 import javax.persistence.*
 
 @Table(name = "product_item_policy")
@@ -27,4 +28,7 @@ class ProductItemPolicy(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 ) : BaseTimeEntity() {
+    init {
+        require(productItemId.greaterOrEqual(0))
+    }
 }

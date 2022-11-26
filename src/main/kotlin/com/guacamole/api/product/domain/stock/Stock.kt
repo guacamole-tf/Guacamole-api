@@ -17,9 +17,10 @@ class Stock(
     }
 
     fun decreaseByCount(count: Int = DEFAULT_DECREASE_COUNT): Stock =
-        Stock(Math.subtractExact(this.count, count), id)
+        Stock(Math.subtractExact(this.count, count), this.id)
 
-    fun update(count: Int): Stock = Stock(count, id)
+    fun update(count: Int): Stock =
+        Stock(count, this.id)
 
     companion object {
         private const val DEFAULT_COUNT: Int = 0

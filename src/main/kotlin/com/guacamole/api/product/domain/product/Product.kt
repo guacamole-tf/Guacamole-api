@@ -1,6 +1,7 @@
 package com.guacamole.api.product.domain.product
 
 import com.guacamole.api.common.entity.BaseTimeEntity
+import com.guacamole.api.common.extension.greaterOrEqual
 import javax.persistence.*
 
 @Table(name = "product")
@@ -25,6 +26,11 @@ class Product(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 ) : BaseTimeEntity() {
+    init {
+        require(categoryId.greaterOrEqual(0))
+        require(name.isNotBlank())
+    }
+
     fun update(
         categoryId: Long,
         name: String,

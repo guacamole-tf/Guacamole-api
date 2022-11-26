@@ -1,6 +1,7 @@
 package com.guacamole.api.product.domain.productitem
 
 import com.guacamole.api.common.entity.BaseTimeEntity
+import com.guacamole.api.common.extension.greaterOrEqual
 import javax.persistence.*
 
 @Table(name = "product_item")
@@ -28,6 +29,10 @@ class ProductItem(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null
 ) : BaseTimeEntity() {
+    init {
+        require(productId.greaterOrEqual(0))
+        require(stockId.greaterOrEqual(0))
+    }
 
     fun update(
         thumbnailImagePath: String,
