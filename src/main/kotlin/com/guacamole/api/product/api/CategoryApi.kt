@@ -4,7 +4,13 @@ import com.guacamole.api.product.api.request.category.CategoryCreateRequest
 import com.guacamole.api.product.api.request.category.CategoryUpdateRequest
 import com.guacamole.api.product.domain.category.CategoryService
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
 import java.net.URI
 import javax.validation.Valid
 
@@ -16,7 +22,7 @@ class CategoryApi(
     @PostMapping
     fun createCategory(@RequestBody @Valid request: CategoryCreateRequest): ResponseEntity<Any> {
         val categoryId = categoryService.save(request.toCommand())
-        return ResponseEntity.created(URI.create("/api/categories/${categoryId}")).build()
+        return ResponseEntity.created(URI.create("/api/categories/$categoryId")).build()
     }
 
     @PutMapping("/{categoryId}")

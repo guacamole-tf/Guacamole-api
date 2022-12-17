@@ -11,7 +11,7 @@ import javax.persistence.MappedSuperclass
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener::class)
-open class BaseTimeEntity(
+class BaseTimeEntity(
 
     @CreatedDate
     @Column(nullable = false, updatable = false)
@@ -20,5 +20,4 @@ open class BaseTimeEntity(
     @LastModifiedDate
     @Column(nullable = false)
     var updateAt: LocalDateTime = LocalDateTime.now(ZoneId.of("Asia/Seoul")),
-) {
-}
+)

@@ -1,7 +1,7 @@
-POST http://localhost:8080/api/categories
+POST http://localhost:8081/api/categories
 Content-Type: application/json
 
 {
-  "name": "name",
+  "name": "testCategories",
   "parentId": 0
 }

@@ -17,10 +17,10 @@ class ProductItemApi(
     fun createProductItem(
         @PathVariable productId: Long,
         @RequestBody @Valid productItemCreateRequest: ProductItemCreateRequest
-    ): ResponseEntity<Any> {
+    ): ResponseEntity<URI> {
         val productItemId =
             productItemFacadeService.registrationProductItem(productId, productItemCreateRequest.toCommand())
-        return ResponseEntity.created(URI.create("/api/products/${productId}/items/${productItemId}")).build()
+        return ResponseEntity.created(URI.create("/api/products/$productId/items/$productItemId")).build()
     }
 
     @PutMapping("/{productItemId}")
@@ -28,7 +28,7 @@ class ProductItemApi(
         @PathVariable productId: Long,
         @PathVariable productItemId: Long,
         @RequestBody @Valid productItemUpdateRequest: ProductItemUpdateRequest
-    ): ResponseEntity<Any> {
+    ): ResponseEntity<UInt> {
         productItemFacadeService.updateProductItem(productId, productItemId, productItemUpdateRequest.toCommand())
         return ResponseEntity.noContent().build()
     }
@@ -37,7 +37,7 @@ class ProductItemApi(
     fun deleteProductItem(
         @PathVariable productId: Long,
         @PathVariable productItemId: Long,
-    ): ResponseEntity<Any> {
+    ): ResponseEntity<UInt> {
         productItemFacadeService.deleteProductItem(productId, productItemId)
         return ResponseEntity.noContent().build()
     }

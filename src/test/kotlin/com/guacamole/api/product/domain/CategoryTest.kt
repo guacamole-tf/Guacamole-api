@@ -1,9 +1,6 @@
 package com.guacamole.api.product.domain
 
-import com.guacamole.api.fixture.CATEGORY_ID
-import com.guacamole.api.fixture.CATEGORY_NAME
-import com.guacamole.api.fixture.CATEGORY_ROOT_PARENT_ID
-import com.guacamole.api.product.domain.category.Category
+import com.guacamole.api.fixture.createCategory
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
@@ -16,7 +13,7 @@ class CategoryTest {
     @ValueSource(strings = ["", " ", "   ", "    "])
     fun `카테고리의 이름이 공백으로만 이루어져 있다면 에러를 발생한다`(name: String) {
         assertThrows<RuntimeException> {
-            createCategory(name)
+            createCategory(name = name)
         }
     }
 
@@ -26,13 +23,5 @@ class CategoryTest {
         assertThrows<RuntimeException> {
             createCategory(parentId = parentId)
         }
-    }
-
-    fun createCategory(
-        name: String = CATEGORY_NAME,
-        parentId: Long = CATEGORY_ROOT_PARENT_ID,
-        id: Long = CATEGORY_ID
-    ): Category {
-        return Category(name, parentId, id)
     }
 }

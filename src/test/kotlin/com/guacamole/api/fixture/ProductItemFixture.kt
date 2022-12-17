@@ -1,6 +1,7 @@
 package com.guacamole.api.fixture
 
 import com.guacamole.api.product.domain.productitem.ProductItem
+import com.guacamole.api.product.domain.stock.Stock
 
 const val PRODUCT_ITEM_PATH = "/api/products/%s/items"
 
@@ -10,12 +11,15 @@ const val PRODUCT_ITEM_COUNT: Int = 1
 const val PRODUCT_ITEM_THUMBNAIL_IMAGE_PATH: String = "http://gaucamoletf.com/images/sampleThumnauilImage.png"
 const val PRODUCT_ITEM_SIZE_UNIT: String = "그램"
 const val PRODUCT_SIZE_RATE: Int = 1
-const val PRODUCT_ITEM_STOCK_ID: Long = 1L
 const val PRODUCT_ITEM_ID: Long = 1L
+
+const val PRODUCT_ITEM_STOCK_ID: Long = 1L
+const val PRODUCT_ITEM_STOCK_COUNT: Int = 0
 
 const val PRODUCT_ITEM_OTHER_PRICE: Int = 2000
 const val PRODUCT_ITEM_OTHER_COUNT: Int = 100
-const val PRODUCT_ITEM_OTHER_THUMBNAIL_IMAGE_PATH: String = "http://gaucamoletf.com/images/otherSampleThumnauilImage.png"
+const val PRODUCT_ITEM_OTHER_THUMBNAIL_IMAGE_PATH: String =
+    "http://gaucamoletf.com/images/otherSampleThumnauilImage.png"
 const val PRODUCT_ITEM_OTHER_SIZE_UNIT: String = "리터"
 const val PRODUCT_SIZE_OTHER_RATE: Int = 10
 
@@ -25,6 +29,13 @@ const val PRODUCT_ITEM_COUNT_FIELD: String = "count"
 const val PRODUCT_ITEM_THUMBNAIL_IMAGE_PATH_FIELD: String = "thumbnailImagePath"
 const val PRODUCT_ITEM_SIZE_UNIT_FIELD: String = "sizeUnit"
 const val PRODUCT_ITEM_SIZE_RATE_FIELD: String = "sizeRate"
+
+fun createStock(
+    count: Int = PRODUCT_ITEM_STOCK_COUNT,
+    id: Long = PRODUCT_ITEM_STOCK_ID
+): Stock {
+    return Stock(count, id)
+}
 
 fun createProductItem(
     productId: Long = PRODUCT_ITEM_PRODUCT_ID,

@@ -1,6 +1,17 @@
 package com.guacamole.api.acceptance.steps
 
-import com.guacamole.api.fixture.*
+import com.guacamole.api.fixture.PRODUCT_CATEGORY_ID
+import com.guacamole.api.fixture.PRODUCT_CATEGORY_ID_FIELD
+import com.guacamole.api.fixture.PRODUCT_DESCRIPTION_IMAGE_PATH
+import com.guacamole.api.fixture.PRODUCT_DESCRIPTION_IMAGE_PATH_FIELD
+import com.guacamole.api.fixture.PRODUCT_DETAIL_DESCRIPTION
+import com.guacamole.api.fixture.PRODUCT_DETAIL_DESCRIPTION_FIELD
+import com.guacamole.api.fixture.PRODUCT_ID
+import com.guacamole.api.fixture.PRODUCT_NAME
+import com.guacamole.api.fixture.PRODUCT_NAME_FIELD
+import com.guacamole.api.fixture.PRODUCT_ORIGIN_PLACE
+import com.guacamole.api.fixture.PRODUCT_ORIGIN_PLACE_FIELD
+import com.guacamole.api.fixture.PRODUCT_PATH
 import io.restassured.RestAssured
 import io.restassured.http.ContentType
 import io.restassured.response.ExtractableResponse
@@ -44,7 +55,7 @@ object ProductSteps {
             .accept(MediaType.APPLICATION_JSON_VALUE)
             .contentType(ContentType.JSON)
             .body(params)
-            .`when`().put(PRODUCT_PATH + "/${id}")
+            .`when`().put(PRODUCT_PATH + "/$id")
             .then().log().all()
             .extract()
     }
@@ -55,7 +66,7 @@ object ProductSteps {
         return RestAssured.given().log().all()
             .accept(MediaType.APPLICATION_JSON_VALUE)
             .contentType(ContentType.JSON)
-            .`when`().delete(PRODUCT_PATH + "/${id}")
+            .`when`().delete(PRODUCT_PATH + "/$id")
             .then().log().all()
             .extract()
     }
@@ -112,17 +123,28 @@ object ProductSteps {
     }
 
     /**
+     * Response Parse Identity Data
+     */
+    fun `상품 식별 값`(
+        response: ExtractableResponse<Response>
+    ): Long {
+        val header = response.header("location")
+        val removePrefix = header.removePrefix(PRODUCT_PATH).removePrefix("/")
+        return removePrefix.toLong()
+    }
+
+    /**
      * Response Assertion
      */
     fun `상품 생성됨`(response: ExtractableResponse<Response>) {
-        AssertionsForInterfaceTypes.assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value());
+        AssertionsForInterfaceTypes.assertThat(response.statusCode()).isEqualTo(HttpStatus.CREATED.value())
     }
 
     fun `상품 수정됨`(response: ExtractableResponse<Response>) {
-        AssertionsForInterfaceTypes.assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
+        AssertionsForInterfaceTypes.assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value())
     }
 
     fun `상품 삭제됨`(response: ExtractableResponse<Response>) {
-        AssertionsForInterfaceTypes.assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value());
+        AssertionsForInterfaceTypes.assertThat(response.statusCode()).isEqualTo(HttpStatus.NO_CONTENT.value())
     }
 }

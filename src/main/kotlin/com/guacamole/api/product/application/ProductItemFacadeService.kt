@@ -43,8 +43,8 @@ class ProductItemFacadeService(
                 productItemCommand.price
             )
         }
-        if(productItemCommand.count > 0) {
-            // TODO: Push Service 연동
+        if (productItemCommand.count > 0) {
+            // TODO: Email Service 연동
         }
     }
 

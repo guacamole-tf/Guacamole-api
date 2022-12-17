@@ -1,6 +1,6 @@
 package com.guacamole.api.product.domain
 
-import com.guacamole.api.product.domain.stock.Stock
+import com.guacamole.api.fixture.createStock
 import org.assertj.core.api.Java6Assertions.assertThat
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
@@ -22,7 +22,7 @@ class StockTest {
 
     @Test
     fun `재고수가 1 이상이라면 재고수를 1개 감소시킬 수 있다`() {
-        val stock = createStock(1)
+        val stock = createStock(count = 1)
 
         val actual = stock.decreaseByCount(1)
 
@@ -41,17 +41,10 @@ class StockTest {
 
     @Test
     fun `재고수가 0 이하라면 재고수를 감소시킬 수 없다`() {
-        val stock = createStock(0)
+        val stock = createStock()
 
         assertThrows<RuntimeException> {
             stock.decreaseByCount(1)
         }
-    }
-
-    fun createStock(
-        count: Int = 0,
-        id: Long = 0L
-    ): Stock {
-        return Stock(count, id)
     }
 }
