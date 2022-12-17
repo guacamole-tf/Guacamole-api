@@ -14,7 +14,7 @@ class ProductApi(
     private val productFacadeService: ProductFacadeService
 ) {
     @PostMapping
-    fun registrationProduct(@RequestBody @Valid request: ProductCreateRequest): ResponseEntity<Any> {
+    fun registrationProduct(@RequestBody @Valid request: ProductCreateRequest): ResponseEntity<URI> {
         val productId = productFacadeService.registrationProduct(request.toCommand())
         return ResponseEntity.created(URI.create("/api/products/$productId")).build()
     }

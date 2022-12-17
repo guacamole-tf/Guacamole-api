@@ -20,7 +20,7 @@ class CategoryApi(
     private val categoryService: CategoryService
 ) {
     @PostMapping
-    fun createCategory(@RequestBody @Valid request: CategoryCreateRequest): ResponseEntity<Any> {
+    fun createCategory(@RequestBody @Valid request: CategoryCreateRequest): ResponseEntity<URI> {
         val categoryId = categoryService.save(request.toCommand())
         return ResponseEntity.created(URI.create("/api/categories/$categoryId")).build()
     }
@@ -29,13 +29,13 @@ class CategoryApi(
     fun updateCategory(
         @RequestBody @Valid request: CategoryUpdateRequest,
         @PathVariable categoryId: Long
-    ): ResponseEntity<Any> {
+    ): ResponseEntity<UInt> {
         categoryService.update(categoryId, request.toCommand())
         return ResponseEntity.noContent().build()
     }
 
     @DeleteMapping("/{categoryId}")
-    fun deleteCategory(@PathVariable categoryId: Long): ResponseEntity<Any> {
+    fun deleteCategory(@PathVariable categoryId: Long): ResponseEntity<UInt> {
         categoryService.deleteById(categoryId)
         return ResponseEntity.noContent().build()
     }
