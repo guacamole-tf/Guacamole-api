@@ -1,0 +1,44 @@
+package com.guacamole.api.product.api
+
+import com.guacamole.api.product.api.request.product.ProductCreateRequest
+import com.guacamole.api.product.api.request.product.ProductUpdateRequest
+import com.guacamole.api.product.application.ProductFacadeService
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RestController
+import java.net.URI
+import javax.validation.Valid
+
+@RequestMapping("/api/products")
+@RestController
+class ProductApi(
+    private val productFacadeService: ProductFacadeService
+) {
+    @PostMapping
+    fun registrationProduct(@RequestBody @Valid request: ProductCreateRequest): ResponseEntity<URI> {
+        val productId = productFacadeService.registrationProduct(request.toCommand())
+        return ResponseEntity.created(URI.create("/api/products/$productId")).build()
+    }
+
+    @PutMapping("/{productId}")
+    fun updateProduct(
+        @PathVariable productId: Long,
+        @RequestBody @Valid request: ProductUpdateRequest
+    ): ResponseEntity<UInt> {
+        productFacadeService.updateProduct(productId, request.toCommand())
+        return ResponseEntity.noContent().build()
+    }
+
+    @DeleteMapping("/{productId}")
+    fun deleteProduct(
+        @PathVariable productId: Long
+    ): ResponseEntity<UInt> {
+        productFacadeService.deleteProduct(productId)
+        return ResponseEntity.noContent().build()
+    }
+}
